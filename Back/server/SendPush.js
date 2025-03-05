@@ -1,8 +1,6 @@
-import webpush from "web-push";
-import { readFileSync } from "fs";
-import path from "path";
-
-
+const webpush = require("web-push");
+const { readFileSync } = require("fs");
+const path = require("path");
 
 // Carga el archivo keys.json
 const keysPath = path.resolve("keys.json");
@@ -16,16 +14,18 @@ webpush.setVapidDetails(
 );
 
 // Función para enviar la notificación push
-export async function sendPush(subscription) {
-  try {
-    await webpush.sendNotification(subscription, "¡Tienes una nueva notificación!");
-    console.log("Notificación enviada con éxito");
-  } catch (error) {
-    if (error.body && error.body.includes('expired') && error.statusCode == 410) {
-      console.log('Suscripción expiró');
-    } else {
-      console.error('Error al enviar la notificación:', error);
-    }
-  }
+function sendPush(subscription) {
+  return webpush.sendNotification(subscription, "¡Tienes una nueva notificación!")
+    .then(() => {
+      console.log("Notificación enviada con éxito");
+    })
+    .catch(error => {
+      if (error.body && error.body.includes('expired') && error.statusCode == 410) {
+        console.log('Suscripción expiró');
+      } else {
+        console.error('Error al enviar la notificación:', error);
+      }
+    });
 }
 
+module.exports = { sendPush };
