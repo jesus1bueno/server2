@@ -21,14 +21,14 @@ const UserSchema = new mongoose.Schema({
         unique:true
     },
     expireTime:{
-        type:time
+        type:Date
     },
     keys:{
         p256dh:{
-            type:string,
+            type:String,
         },
         auth:{
-            type:string 
+            type:String 
         }
   }
 }
