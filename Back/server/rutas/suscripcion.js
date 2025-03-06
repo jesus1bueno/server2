@@ -4,11 +4,15 @@ const { sendPush } = require('../SendPush.js');  // Usar require en lugar de imp
 const subs = require('../models/subsModel.js');
 const users = require('../models/userModel.js');
 const webpush = require('web-push');
+
+
 // Ruta para actualizar la suscripción del usuario
 router.post('/suscripcion', async (req, res) => {
   const { userId, suscripcion } = req.body;
+  return res.json({ message: 'si llego' });
 
-  try {
+
+  /*try {
     // Buscar y actualizar el usuario
     const user = await users.findByIdAndUpdate(
       userId, // Buscar por ID
@@ -26,7 +30,7 @@ router.post('/suscripcion', async (req, res) => {
     res.status(200).json({ message: 'Suscripción actualizada en el usuario', user });
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }
+  }*/
 });
 
 
