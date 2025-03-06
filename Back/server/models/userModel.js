@@ -18,7 +18,8 @@ const UserSchema = new mongoose.Schema({
   suscripcion:{
     endpoint:{
         type: String,
-        unique:true
+        unique:true,
+        sparse: true 
     },
     expireTime:{
         type:Date
