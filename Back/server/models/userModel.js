@@ -36,4 +36,4 @@ const UserSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('users', UserSchema, 'usuarios');
+module.exports = mongoose.model('users', UserSchema, 'pwasUsers');
