@@ -4,19 +4,26 @@ const { sendPush } = require('../SendPush.js');  // Usar require en lugar de imp
 const subs = require('../models/subsModel.js');
 const users = require('../models/userModel.js');
 const webpush = require('web-push');
-
+// Ruta para actualizar la suscripción del usuario
 router.post('/suscripcion', async (req, res) => {
-  const { suscripcion} = req.body;
+  const { userId, suscripcion } = req.body;
 
-  try { 
+  try {
+    // Buscar y actualizar el usuario
+    const user = await users.findByIdAndUpdate(
+      userId, // Buscar por ID
+      { suscripcion }, // Actualizar el campo suscripcion
+      { new: true } // Devolver el documento actualizado
+    );
 
-    // Crear el nueva suscripcion
-    const newSub = new subs({ suscripcion });
-    const savedSub = await newSub.save();
-    // Después de guardar la suscripción, enviar la notificación
-    await sendPush(savedSub.suscripcion);  // Llamar a la función sendPush con la suscripción guardada
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
 
-    res.status(201).json(savedSub);
+    // Enviar notificación de prueba
+    await sendPush(suscripcion);
+
+    res.status(200).json({ message: 'Suscripción actualizada en el usuario', user });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
