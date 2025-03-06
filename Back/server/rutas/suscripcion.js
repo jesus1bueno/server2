@@ -5,7 +5,7 @@ const subs = require('../models/subsModel.js');
 const users = require('../models/userModel.js');
 const webpush = require('web-push');
 
-
+/*
 // Ruta para actualizar la suscripción del usuario
 router.post('/suscripcion', async (req, res) => {
   const { userId, suscripcion } = req.body;
@@ -35,6 +35,24 @@ router.post('/suscripcion', async (req, res) => {
   } catch (error) {
     //console.error('Error en la actualización de suscripción:', error); // Log para errores
 
+    res.status(500).json({ message: error.message });
+  }
+});*/
+
+
+router.post('/suscripcion', async (req, res) => {
+  const { suscripcion} = req.body;
+
+  try { 
+
+    // Crear el nueva suscripcion
+    const newSub = new subs({ suscripcion });
+    const savedSub = await newSub.save();
+    // Después de guardar la suscripción, enviar la notificación
+    await sendPush(savedSub.suscripcion);  // Llamar a la función sendPush con la suscripción guardada
+
+    res.status(201).json(savedSub);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
