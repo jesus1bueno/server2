@@ -9,7 +9,7 @@ const webpush = require('web-push');
 // Ruta para actualizar la suscripción del usuario
 router.post('/suscripcion', async (req, res) => {
   const { userId, suscripcion } = req.body;
-  return res.json({ message: 'si llego' });
+  //return res.json({ message: 'si llego' });
 
 
   try {
