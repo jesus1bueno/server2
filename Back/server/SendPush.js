@@ -14,8 +14,8 @@ webpush.setVapidDetails(
 );
 
 // Función para enviar la notificación push
-function sendPush(subscription) {
-  return webpush.sendNotification(subscription, "¡Tienes una nueva !")
+function sendPush(subscription,userName) {
+  return webpush.sendNotification(subscription, `¡Hola ${userName}, tienes una nueva notificación!`)
     .then(() => {
       console.log("Notificación enviada con éxito");
     })
