@@ -12,7 +12,7 @@ router.post('/suscripcion', async (req, res) => {
   return res.json({ message: 'si llego' });
 
 
-  /*try {
+  try {
     // Buscar y actualizar el usuario
     const user = await users.findByIdAndUpdate(
       userId, // Buscar por ID
@@ -30,7 +30,7 @@ router.post('/suscripcion', async (req, res) => {
     res.status(200).json({ message: 'Suscripción actualizada en el usuario', user });
   } catch (error) {
     res.status(500).json({ message: error.message });
-  }*/
+  }
 });
 
 
