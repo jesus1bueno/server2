@@ -11,7 +11,7 @@ router.post('/suscripcion', async (req, res) => {
   const { userId, suscripcion } = req.body;
   //return res.json({ message: 'si llego' });
 
-  console.log('Datos recibidos:', req.body); // Log para depuración
+  //console.log('Datos recibidos:', req.body); // Log para depuración
 
 
   try {
@@ -25,7 +25,7 @@ router.post('/suscripcion', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
     }
-    console.log('Usuario actualizado:', user); // Log para depuración
+    //console.log('Usuario actualizado:', user); // Log para depuración
 
 
     // Enviar notificación de prueba
@@ -33,7 +33,7 @@ router.post('/suscripcion', async (req, res) => {
 
     res.status(200).json({ message: 'Suscripción actualizada en el usuario', user });
   } catch (error) {
-    console.error('Error en la actualización de suscripción:', error); // Log para errores
+    //console.error('Error en la actualización de suscripción:', error); // Log para errores
 
     res.status(500).json({ message: error.message });
   }
