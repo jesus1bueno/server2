@@ -1,6 +1,7 @@
 const webpush = require("web-push");
 const { readFileSync } = require("fs");
 const path = require("path");
+const { error } = require("console");
 
 // Carga el archivo keys.json
 const keysPath = path.resolve("keys.json");
@@ -8,7 +9,7 @@ const keys = JSON.parse(readFileSync(keysPath, "utf-8"));
 
 // Configurar claves VAPID
 webpush.setVapidDetails(
-  "mailto:pablo.carranza.22e@utzmg.edu.mx", // Cambia esto por tu correo real
+  "mailto:pablo.carranza.22e@utzmg.edu.mx", 
   keys.publicKey,
   keys.privateKey
 );
@@ -26,6 +27,20 @@ function sendPush(subscription,userName) {
         console.error('Error al enviar la notificación:', error);
       }
     });
+}
+
+async function sends(req,res) {
+  const sub ={  }
+  webpush.sendNotification(sub,"mensaje")
+  .then(succses =>{
+    res.json({mensaje:"pk"});
+  })
+  .catch(async error=>{
+    if(error.body.includes('expired')&& error.statusCode==410){
+        console.log('sub expirada');
+    }
+    res.json({mensaje:"error"})
+  })
 }
 
 module.exports = { sendPush };
