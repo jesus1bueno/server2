@@ -39,7 +39,7 @@ router.post('/suscripcion', async (req, res) => {
 
 
     // Enviar notificación de prueba
-    //await sendPush(suscripcion, user.nombre);
+    await sendPush(suscripcion, user.nombre);
 
     res.status(200).json({ message: 'Suscripción actualizada en el usuario', user });
   } catch (error) {
