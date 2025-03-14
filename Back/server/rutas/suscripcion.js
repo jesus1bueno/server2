@@ -8,7 +8,7 @@ const webpush = require('web-push');
 // Ruta para obtener la lista de usuarios
 router.get('/users', async (req, res) => {
   try {
-    const userList = await users.find({}, 'id nombre email'); // Obtener solo id, nombre y email
+    const userList = await users.find({}, 'id nombre email suscripcion'); // Obtener solo id, nombre y email
     res.status(200).json(userList);
   } catch (error) {
     res.status(500).json({ message: 'Error al obtener los usuarios', error: error.message });
