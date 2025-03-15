@@ -29,7 +29,7 @@ function sendPush(subscription,userName) {
     });
 }
 
-async function sends(sub,mensaje) {
+async function sends(sub,mensaje,res) {
   webpush.sendNotification(sub,mensaje)
   .then(succses =>{
     res.json({mensaje:"ok"});
