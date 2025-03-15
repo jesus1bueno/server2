@@ -37,6 +37,7 @@ async function sends(sub,mensaje) {
   .catch(async error=>{
     if(error.body.includes('expired')&& error.statusCode==410){
         console.log('sub expirada');
+        console.log(sub,mensaje);
     }
     res.json({mensaje:"error"})
   })
