@@ -29,11 +29,10 @@ function sendPush(subscription,userName) {
     });
 }
 
-async function sends(req,res) {
-  const sub ={  }
-  webpush.sendNotification(sub,"mensaje")
+async function sends(sub,mensaje) {
+  webpush.sendNotification(sub,mensaje)
   .then(succses =>{
-    res.json({mensaje:"pk"});
+    res.json({mensaje:"ok"});
   })
   .catch(async error=>{
     if(error.body.includes('expired')&& error.statusCode==410){
@@ -43,4 +42,4 @@ async function sends(req,res) {
   })
 }
 
-module.exports = { sendPush };
+module.exports = { sendPush,sends };

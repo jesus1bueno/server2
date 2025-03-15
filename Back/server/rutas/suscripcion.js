@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { sendPush } = require('../SendPush.js');  // Usar require en lugar de import
+const { sendPush,sends } = require('../SendPush.js');  // Usar require en lugar de import
 const subs = require('../models/subsModel.js');
 const users = require('../models/userModel.js');
 const webpush = require('web-push');
@@ -49,6 +49,21 @@ router.post('/suscripcion', async (req, res) => {
   }
 });
 
+
+
+// Ruta para actualizar la suscripción del usuario
+router.post('/suscripcionMod', async (req, res) => {
+  const { suscripcion, mensaje } = req.body;
+
+  try {
+    // Enviar notificación de prueba
+    await sends(suscripcion, mensaje);
+
+    res.status(200).json({ message: 'mensaje enviado' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 /*
 router.post('/suscripcion', async (req, res) => {
   const { suscripcion} = req.body;
