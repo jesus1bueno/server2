@@ -35,7 +35,7 @@ async function sends(sub, mensaje) {
     return { mensaje: "ok" }; // Retorna un objeto, pero no usa `res.json()`
   } catch (error) {
     if (error.body.includes('expired') && error.statusCode == 410) {
-      console.log('Sub expirada:', sub, mensaje);
+      console.log('Sub expirada:');
     }
     return { mensaje: "error", error: error.message }; // Retorna error sin usar `res.json()`
   }
