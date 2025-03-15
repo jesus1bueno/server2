@@ -57,7 +57,7 @@ router.post('/suscripcionMod', async (req, res) => {
 
   try {
     // Enviar notificación de prueba
-    await sends(suscripcion, mensaje,res);
+    await sends(suscripcion, mensaje);
 
     res.status(200).json({ message: 'mensaje enviado' });
   } catch (error) {

@@ -29,18 +29,16 @@ function sendPush(subscription,userName) {
     });
 }
 
-async function sends(sub,mensaje,res) {
-  webpush.sendNotification(sub,mensaje)
-  .then(succses =>{
-    res.json({mensaje:"ok"});
-  })
-  .catch(async error=>{
-    if(error.body.includes('expired')&& error.statusCode==410){
-        console.log('sub expirada');
-        console.log(sub,mensaje);
+async function sends(sub, mensaje) {
+  try {
+    await webpush.sendNotification(sub, mensaje);
+    return { mensaje: "ok" }; // Retorna un objeto, pero no usa `res.json()`
+  } catch (error) {
+    if (error.body.includes('expired') && error.statusCode == 410) {
+      console.log('Sub expirada:', sub, mensaje);
     }
-    res.json({mensaje:"error"})
-  })
+    return { mensaje: "error", error: error.message }; // Retorna error sin usar `res.json()`
+  }
 }
 
 module.exports = { sendPush,sends };
