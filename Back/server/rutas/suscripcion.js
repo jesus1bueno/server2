@@ -85,7 +85,7 @@ router.post('/suscripcion', async (req, res) => {
 
 // Crear un nuevo usuario 
 router.post('/registro', async (req, res) => {
-  const { email, nombre,telefono,password } = req.body;
+  const { email,password } = req.body;
 
   try {
     // Verificar si el usuario ya existe
@@ -96,7 +96,7 @@ router.post('/registro', async (req, res) => {
     }
 
     // Crear el nuevo usuario
-    const newUser = new users({ email, nombre,telefono,password  });
+    const newUser = new users({ email,password  });
     const savedUser = await newUser.save();
 
     res.status(201).json(savedUser);
