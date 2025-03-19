@@ -20,7 +20,7 @@ app.use(cors({
   
 
 // Configurar la ruta principal de la API
-app.use('/api/subs', suscrip);
+app.use('/api', suscrip);
 
 // Ruta base para verificar si el servidor está funcionando
 app.get("/", (req, res) => {
