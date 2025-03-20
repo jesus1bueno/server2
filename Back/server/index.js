@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:5173','https://pwa-7rs5.onrender.com','http://localhost:3003','http://localhost:3004','http://localhost:3005'], 
+    origin: ['http://localhost:3000', 'http://localhost:5173','https://pwa-7rs5.onrender.com','http://localhost:3000','http://localhost:3001','http://localhost:3002','http://localhost:3003','http://localhost:3004','http://localhost:3005'], 
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
   }));
